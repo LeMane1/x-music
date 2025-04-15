@@ -13,6 +13,17 @@ export interface IMusicInfo{
   "tags": ITags;
 }
 
+export interface IStats{
+  rate_downloads_total: number;
+  rate_listened_total: number;
+  playlisted: number;
+  favorited: number;
+  likes: number;
+  dislikes: number;
+  avgnote: number;
+  notes: number;
+}
+
 export interface ITrack {
   "id": string;
   "name": string;
@@ -34,7 +45,7 @@ export interface ITrack {
   "waveform": string;
   "image": string;
   "musicinfo": IMusicInfo;
-  "stats": unknown;
+  "stats": IStats;
   "audiodownload_allowed": boolean;
 }
 

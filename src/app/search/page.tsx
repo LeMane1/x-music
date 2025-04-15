@@ -1,5 +1,6 @@
 import {fetchWithRetries} from "@/api/fetchDataWithRetries";
 import {IGetTracksResponse} from "@/api/types";
+import TracksList from "@/app/search/tracks-list";
 
 export default async function SearchPage(props: {
   searchParams?: Promise<{
@@ -13,14 +14,15 @@ export default async function SearchPage(props: {
     url: '/v3.0/tracks/',
     searchParams: {
       namesearch: searchName,
-      include: ['musicinfo', 'stats']
+      include: 'musicinfo+stats'
     }
   })
   
-  const tracks = getTracksResponse?.results
+  const tracks = getTracksResponse?.results ?? null
   
   return (
     <>
+      <TracksList tracks={tracks} />
     </>
   )
 }
