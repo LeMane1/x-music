@@ -19,26 +19,37 @@ export default function TrackListItem({ track }: ITrackListItemProps) {
       px={2}
       sx={{
         backgroundColor: "#272727",
+        opacity: .9,
         '&:hover':{
           backgroundColor: "#2b2b2b",
-        }
+          cursor: "pointer",
+          opacity: 1
+        },
+        '&:hover [data-id="track-list-item-image"]': {
+          transform: "scale(1.1)",
+          transformOrigin: "center center",
+          transition: "transform 0.2s ease-in-out",
+        },
       }}
     >
       <Stack direction="row" justifyContent="space-between" alignItems="center">
         <Stack direction="row" spacing={1} alignItems="center">
           <Box
+            data-id="track-list-item-image"
             sx={{
               width: 40,
               height: 40,
               borderRadius: 2,
               overflow: 'hidden',
+              position: 'relative',
+              transition: "transform 0.2s ease-in-out",
             }}
           >
             <Image
               src={track.image}
-              width={40}
-              height={40}
-              alt={'ghgh'}
+              fill
+              alt={track.name}
+              loading='lazy'
             />
           </Box>
           
