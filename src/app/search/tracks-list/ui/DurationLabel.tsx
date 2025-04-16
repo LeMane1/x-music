@@ -1,4 +1,4 @@
-import {getDurationString} from "@/app/search/tracks-list/lib/getDurationString";
+import {getDurationString} from "@/lib/functions/getDurationString";
 import {Typography} from "@mui/material";
 
 interface IDurationLabelProps {

@@ -1,6 +1,5 @@
 'use client'
 
-import {useTheme} from "@mui/material/styles";
 import {useMediaQuery} from "@mui/system";
 import {Box, Container} from "@mui/material";
 import theme from "@/styles/theme";

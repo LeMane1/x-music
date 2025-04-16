@@ -12,6 +12,8 @@ interface IAudioPlayerTrack{
 export interface AudioPlayerState{
   playerTrack: IAudioPlayerTrack;
   isPlaying: boolean;
+  currentTime: number;
+  currentVolume: number;
 }
 
 const initialState: AudioPlayerState = {
@@ -23,6 +25,8 @@ const initialState: AudioPlayerState = {
     trackDuration: 0,
   },
   isPlaying: false,
+  currentTime: 0,
+  currentVolume: 0.5
 }
 
 export const audioPlayerSlice = createSlice({
@@ -34,6 +38,12 @@ export const audioPlayerSlice = createSlice({
     },
     changePlaying: (state) => {
       state.isPlaying = !state.isPlaying
+    },
+    changeCurrentTime: (state, action: PayloadAction<number>) => {
+      state.currentTime = action.payload
+    },
+    changeCurrentVolume: (state, action: PayloadAction<number>) => {
+      state.currentVolume = action.payload
     }
   },
 })
@@ -41,7 +51,9 @@ export const audioPlayerSlice = createSlice({
 // Action creators are generated for each case reducer function
 export const {
   changeCurrentTrack,
-  changePlaying
+  changePlaying,
+  changeCurrentTime,
+  changeCurrentVolume
 } = audioPlayerSlice.actions
 
 export default audioPlayerSlice.reducer
