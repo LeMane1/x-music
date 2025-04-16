@@ -14,19 +14,19 @@ export default function AudioPlayerWrapper({children}: IAudioPlayerWrapperProps)
   return (
     <Box sx={{
       position: 'fixed',
-      bottom: isLgSize ? 16 : 0,
+      bottom: 0,
       left: 0,
       width: '100%',
       height: 60,
       display: 'flex',
       justifyContent: 'center',
+      backgroundColor: "rgba(115,115,115,0.2)",
+      backdropFilter: 'blur(20px)',
     }}>
       <Container
         maxWidth='lg'
         sx={{
-          backgroundColor: "rgba(115,115,115,0.2)",
-          backdropFilter: 'blur(20px)',
-          borderRadius: isLgSize ? 2 : 0,
+          
           display: 'flex',
           justifyContent: 'center',
           alignItems: 'center',

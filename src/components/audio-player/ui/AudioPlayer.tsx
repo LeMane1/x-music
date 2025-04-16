@@ -12,13 +12,15 @@ import FastRewindIcon from '@mui/icons-material/FastRewind';
 import FastForwardIcon from '@mui/icons-material/FastForward';
 import PlaybackProgressBar from "@/components/audio-player/ui/PlaybackProgressBar";
 import VolumeSlider from "@/components/audio-player/ui/VolumeSlider";
+import {useMediaQuery} from "@mui/system";
+import theme from "@/styles/theme";
 
 export default function AudioPlayer() {
   const dispatch = useAppDispatch();
   const {audioUrl, trackImageUrl, trackName, trackArtistName} = useAppSelector(state => state.audioPlayerReducer.playerTrack);
   const {isPlaying} = useAppSelector(state => state.audioPlayerReducer)
-  
   const audioRef = useRef<HTMLAudioElement | null>(null)
+  const isMdSize = useMediaQuery(theme.breakpoints.up('md'));
   
   const togglePlayback = () => dispatch(changePlaying(!isPlaying))
   
@@ -45,24 +47,36 @@ export default function AudioPlayer() {
               ref={audioRef}
               src={audioUrl}
               preload="auto"
-              // onPlay={() => dispatch(changePlaying(true))}
-              // onPause={() => dispatch(changePlaying(false))}
             />
             <Stack
               direction='row'
               alignItems='center'
-              spacing={1}
+              justifyContent={isMdSize ? 'flex-start' : 'space-between'}
+              spacing={2}
             >
-              <TrackImage imageUrl={trackImageUrl} trackName={trackName} size={40}/>
-              
-              <Stack direction='column'>
-                <Typography variant='subtitle1' component='h6'>
-                  {trackName}
-                </Typography>
+              <Stack direction='row' spacing={1} alignItems='center'>
+                <TrackImage imageUrl={trackImageUrl} trackName={trackName} size={40}/>
                 
-                <Typography variant='caption' component='span' color='textSecondary'>
-                  {trackArtistName}
-                </Typography>
+                <Stack
+                  direction='column'
+                  sx={{
+                    width: {
+                      xs: 150,
+                      sm: 200,
+                      md: 280,
+                      lg: 280,
+                      xl: 280
+                    },
+                  }}
+                >
+                  <Typography variant='subtitle1' component='h6' noWrap>
+                    {trackName}
+                  </Typography>
+                  
+                  <Typography variant='caption' component='span' color='textSecondary' noWrap>
+                    {trackArtistName}
+                  </Typography>
+                </Stack>
               </Stack>
               
               <Stack direction='row'>
@@ -79,9 +93,9 @@ export default function AudioPlayer() {
                 </IconButton>
               </Stack>
               
-              <PlaybackProgressBar audioRef={audioRef}/>
+              {isMdSize && <PlaybackProgressBar audioRef={audioRef}/>}
               
-              <VolumeSlider audioRef={audioRef}/>
+              {isMdSize && <VolumeSlider audioRef={audioRef}/>}
             </Stack>
           </Container>
           :
