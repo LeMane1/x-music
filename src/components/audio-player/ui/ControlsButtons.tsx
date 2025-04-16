@@ -5,18 +5,29 @@ import FastRewindIcon from "@mui/icons-material/FastRewind";
 import PauseIcon from "@mui/icons-material/Pause";
 import PlayArrowIcon from "@mui/icons-material/PlayArrow";
 import FastForwardIcon from "@mui/icons-material/FastForward";
-import {changeCurrentTrack, changePlaying} from "@/lib/slices/audioPlayerSlice";
+import {changeCurrentTime, changeCurrentTrack, changePlaying} from "@/lib/slices/audioPlayerSlice";
 import {useAppDispatch, useAppSelector} from "@/lib/hooks";
+import {RefObject} from "react";
 
-export default function ControlsButtons(){
+interface IControlsButtonsProps {
+  audioRef: RefObject<HTMLAudioElement | null>;
+}
+
+export default function ControlsButtons({audioRef}: IControlsButtonsProps) {
   const dispatch = useAppDispatch();
-  const {isPlaying} = useAppSelector(state => state.audioPlayerReducer)
+  const {isPlaying, currentTime} = useAppSelector(state => state.audioPlayerReducer)
   const tracks = useAppSelector(state => state.mainReducer.tracks)
   const trackId = useAppSelector(state => state.audioPlayerReducer.playerTrack.trackId)
   
   const togglePlayback = () => dispatch(changePlaying(!isPlaying))
   
   const handleBackwardTrack = () => {
+    if (currentTime && audioRef.current){
+      audioRef.current.currentTime = 0;
+      dispatch(changeCurrentTime(0))
+      return
+    }
+    
     const currentIndex = tracks.findIndex((track) => track.id === trackId)
     
     if (currentIndex > 0) {

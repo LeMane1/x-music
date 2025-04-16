@@ -14,7 +14,7 @@ export default function AudioPlayerWrapper({children}: IAudioPlayerWrapperProps)
   return (
     <Box sx={{
       position: 'fixed',
-      bottom: isLgSize ? 16 : 0,
+      bottom: isLgSize ? 12 : 0,
       left: 0,
       width: '100%',
       height: 60,

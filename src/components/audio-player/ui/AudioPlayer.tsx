@@ -74,7 +74,7 @@ export default function AudioPlayer() {
                 </Stack>
               </Stack>
               
-              <ControlsButtons/>
+              <ControlsButtons audioRef={audioRef}/>
               
               {isMdSize && <PlaybackProgressBar audioRef={audioRef}/>}
               
