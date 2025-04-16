@@ -11,7 +11,6 @@ interface ITrackListItemProps {
 }
 
 export default function TrackListItem({ track }: ITrackListItemProps) {
-  console.log(track.stats)
   return (
     <Box
       borderRadius={2}
