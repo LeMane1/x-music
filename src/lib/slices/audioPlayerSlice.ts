@@ -2,6 +2,7 @@ import { createSlice } from '@reduxjs/toolkit'
 import type { PayloadAction } from '@reduxjs/toolkit'
 
 interface IAudioPlayerTrack{
+  trackId: string;
   trackName: string;
   trackArtistName: string;
   trackImageUrl: string;
@@ -18,6 +19,7 @@ export interface AudioPlayerState{
 
 const initialState: AudioPlayerState = {
   playerTrack: {
+    trackId: '',
     trackName: '',
     trackArtistName: '',
     trackImageUrl: '',

@@ -7,8 +7,8 @@ import ListenedCounter from "@/app/search/tracks-list/ui/ListenedCounter";
 import DurationLabel from "@/app/search/tracks-list/ui/DurationLabel";
 import FavoritesCounter from "@/app/search/tracks-list/ui/FavoritesCounter";
 import TrackImage from "@/shared/TrackImage";
-import {useAppDispatch} from "@/lib/hooks";
-import {changeCurrentTrack, changePlaying} from "@/lib/slices/audioPlayerSlice";
+import {useAppDispatch, useAppSelector} from "@/lib/hooks";
+import {changeCurrentTrack} from "@/lib/slices/audioPlayerSlice";
 
 interface ITrackListItemProps {
   track: ITrack;
@@ -16,9 +16,12 @@ interface ITrackListItemProps {
 
 export default function TrackListItem({ track }: ITrackListItemProps) {
   const dispatch= useAppDispatch()
+  const {trackId} = useAppSelector(state => state.audioPlayerReducer.playerTrack)
+  const isPlaying = useAppSelector(state => state.audioPlayerReducer)
   
   const handleOnClick = () => {
     dispatch(changeCurrentTrack({
+      trackId: track.id,
       trackName: track.name,
       trackArtistName: track.artist_name,
       trackImageUrl: track.image,
@@ -50,7 +53,11 @@ export default function TrackListItem({ track }: ITrackListItemProps) {
     >
       <Stack direction="row" justifyContent="space-between" alignItems="center">
         <Stack direction="row" spacing={2} alignItems="center">
-          <TrackImage imageUrl={track.image} trackName={track.name} />
+          <TrackImage
+            imageUrl={track.image}
+            trackName={track.name}
+            showPlayingLabel={isPlaying && trackId === track.id}
+          />
           
           <Stack direction="column" justifyContent='center'>
             <Typography variant="subtitle2" component="h6" fontWeight={'bold'}>
