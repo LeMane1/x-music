@@ -37,10 +37,9 @@ export default function TrackListItem({ track }: ITrackListItemProps) {
       py={1}
       px={2}
       sx={{
-        backgroundColor: "#272727",
         opacity: .9,
         '&:hover':{
-          backgroundColor: "#2b2b2b",
+          backgroundColor: "#232323",
           cursor: "pointer",
           opacity: 1
         },

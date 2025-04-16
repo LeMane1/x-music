@@ -2,7 +2,7 @@
 
 import {ITrack} from "@/api/types";
 import TrackListItem from "@/app/search/tracks-list/ui/TrackListItem";
-import {Button, Stack} from "@mui/material";
+import {Box, Divider, Stack} from "@mui/material";
 import {useAppDispatch, useAppSelector} from "@/lib/hooks";
 import {useEffect} from "react";
 import {addTracks} from "@/lib/slices/mainSlice";
@@ -21,14 +21,36 @@ export default function TracksList({preloadedTracks}: ITracksListProps) {
   }, []);
   
   return (
-    <Stack direction="column" spacing={2}>
-      {
-        tracks && tracks.map((track: ITrack) => (
-          <TrackListItem key={track.id} track={track} />
-        ))
-      }
+    <>
+      <Stack
+        direction="column"
+        mb={3}
+        divider={
+          <Divider
+            orientation="horizontal"
+            flexItem
+            sx={{
+              marginLeft: 9,
+              marginRight: 2,
+              opacity: .7
+            }}
+          />}
+      >
+        {
+          tracks && tracks.map((track: ITrack, index: number) => (
+            <TrackListItem key={track.id} track={track}/>
+          ))
+        }
+      </Stack>
       
-      <LoadButton/>
-    </Stack>
+      <Box sx={{
+        width: '100%',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+      }}>
+        <LoadButton/>
+      </Box>
+    </>
   )
 }
