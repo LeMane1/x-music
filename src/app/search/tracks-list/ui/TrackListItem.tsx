@@ -1,18 +1,35 @@
+'use client'
+
 import {ITrack} from "@/api/types";
 import {Box, Divider, Stack, Typography} from "@mui/material";
-import Image from 'next/image'
 import GenresList from "@/app/search/tracks-list/ui/GenresList";
 import ListenedCounter from "@/app/search/tracks-list/ui/ListenedCounter";
 import DurationLabel from "@/app/search/tracks-list/ui/DurationLabel";
 import FavoritesCounter from "@/app/search/tracks-list/ui/FavoritesCounter";
+import TrackImage from "@/shared/TrackImage";
+import {useAppDispatch} from "@/lib/hooks";
+import {changeCurrentTrack} from "@/lib/slices/audioPlayerSlice";
 
 interface ITrackListItemProps {
   track: ITrack;
 }
 
 export default function TrackListItem({ track }: ITrackListItemProps) {
+  const dispatch= useAppDispatch()
+  
+  const handleOnClick = () => {
+    dispatch(changeCurrentTrack({
+      trackName: track.name,
+      trackArtistName: track.artist_name,
+      trackImageUrl: track.image,
+      trackDuration: track.duration,
+      audioUrl: track.audio
+    }))
+  }
+  
   return (
     <Box
+      onClick={handleOnClick}
       borderRadius={2}
       py={1}
       px={2}
@@ -32,25 +49,8 @@ export default function TrackListItem({ track }: ITrackListItemProps) {
       }}
     >
       <Stack direction="row" justifyContent="space-between" alignItems="center">
-        <Stack direction="row" spacing={1} alignItems="center">
-          <Box
-            data-id="track-list-item-image"
-            sx={{
-              width: 40,
-              height: 40,
-              borderRadius: 2,
-              overflow: 'hidden',
-              position: 'relative',
-              transition: "transform 0.2s ease-in-out",
-            }}
-          >
-            <Image
-              src={track.image}
-              fill
-              alt={track.name}
-              loading='lazy'
-            />
-          </Box>
+        <Stack direction="row" spacing={2} alignItems="center">
+          <TrackImage imageUrl={track.image} trackName={track.name} />
           
           <Stack direction="column" justifyContent='center'>
             <Typography variant="subtitle2" component="h6" fontWeight={'bold'}>

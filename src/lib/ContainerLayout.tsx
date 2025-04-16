@@ -1,4 +1,5 @@
 import {Container, Stack} from "@mui/material";
+import AudioPlayer from "@/components/audio-player";
 
 export default function ContainerLayout(
   {
@@ -14,10 +15,12 @@ export default function ContainerLayout(
       <Container
         maxWidth="lg"
         sx={{
-          padding: 2
+          padding: 2,
       }}>
         {children}
       </Container>
+      
+      <AudioPlayer/>
     </Stack>
   )
 }

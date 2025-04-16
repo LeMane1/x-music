@@ -1,10 +1,12 @@
 import { configureStore, combineReducers } from '@reduxjs/toolkit'
 import {musicApi} from "@/api/api";
 import mainReducer from '@/lib/slices/mainSlice'
+import audioPlayerReducer from '@/lib/slices/audioPlayerSlice'
 
 const rootReducer = combineReducers({
   [musicApi.reducerPath]: musicApi.reducer,
   mainReducer,
+  audioPlayerReducer
 })
 
 export const makeStore = () => {
