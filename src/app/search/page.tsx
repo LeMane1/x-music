@@ -21,8 +21,6 @@ export default async function SearchPage(props: {
   const tracks = getTracksResponse?.results ?? null
   
   return (
-    <>
-      <TracksList tracks={tracks} />
-    </>
+    <TracksList preloadedTracks={tracks}/>
   )
 }

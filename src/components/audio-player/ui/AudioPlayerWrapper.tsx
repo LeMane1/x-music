@@ -1,16 +1,12 @@
 'use client'
 
-import {useMediaQuery} from "@mui/system";
 import {Box, Container} from "@mui/material";
-import theme from "@/styles/theme";
 
 interface IAudioPlayerWrapperProps {
   children?: React.ReactNode;
 }
 
 export default function AudioPlayerWrapper({children}: IAudioPlayerWrapperProps) {
-  const isLgSize = useMediaQuery(theme.breakpoints.up('lg'));
-  
   return (
     <Box sx={{
       position: 'fixed',
