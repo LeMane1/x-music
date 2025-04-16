@@ -32,7 +32,7 @@ export default function TracksList({preloadedTracks}: ITracksListProps) {
             sx={{
               marginLeft: 9,
               marginRight: 2,
-              opacity: .7
+              opacity: .2
             }}
           />}
       >
