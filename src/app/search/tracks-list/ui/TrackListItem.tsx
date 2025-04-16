@@ -8,7 +8,7 @@ import DurationLabel from "@/app/search/tracks-list/ui/DurationLabel";
 import FavoritesCounter from "@/app/search/tracks-list/ui/FavoritesCounter";
 import TrackImage from "@/shared/TrackImage";
 import {useAppDispatch} from "@/lib/hooks";
-import {changeCurrentTrack} from "@/lib/slices/audioPlayerSlice";
+import {changeCurrentTrack, changePlaying} from "@/lib/slices/audioPlayerSlice";
 
 interface ITrackListItemProps {
   track: ITrack;

@@ -34,10 +34,12 @@ export const audioPlayerSlice = createSlice({
   initialState,
   reducers: {
     changeCurrentTrack: (state, action: PayloadAction<IAudioPlayerTrack>) => {
+      state.isPlaying = false
+      state.currentTime = 0
       state.playerTrack = action.payload
     },
-    changePlaying: (state) => {
-      state.isPlaying = !state.isPlaying
+    changePlaying: (state, action: PayloadAction<boolean>) => {
+      state.isPlaying = action.payload
     },
     changeCurrentTime: (state, action: PayloadAction<number>) => {
       state.currentTime = action.payload

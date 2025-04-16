@@ -1,7 +1,7 @@
 'use client'
 
 import {Container, IconButton, Stack, Typography} from "@mui/material";
-import {useRef} from "react";
+import {useEffect, useRef} from "react";
 import {useAppDispatch, useAppSelector} from "@/lib/hooks";
 import PlayArrowIcon from '@mui/icons-material/PlayArrow';
 import PauseIcon from '@mui/icons-material/Pause';
@@ -15,20 +15,26 @@ import VolumeSlider from "@/components/audio-player/ui/VolumeSlider";
 
 export default function AudioPlayer() {
   const dispatch = useAppDispatch();
-  const {audioUrl, trackImageUrl, trackName, trackDuration, trackArtistName} = useAppSelector(state => state.audioPlayerReducer.playerTrack);
+  const {audioUrl, trackImageUrl, trackName, trackArtistName} = useAppSelector(state => state.audioPlayerReducer.playerTrack);
   const {isPlaying} = useAppSelector(state => state.audioPlayerReducer)
   
   const audioRef = useRef<HTMLAudioElement | null>(null)
   
-  const togglePlayback = () => {
-    if (!audioRef.current) return
+  const togglePlayback = () => dispatch(changePlaying(!isPlaying))
+  
+  useEffect(() => {
+    if (!audioRef.current) return;
     
-    if (audioRef.current.paused) {
-      audioRef.current.play()
+    if (isPlaying) {
+      audioRef.current.play();
     } else {
-      audioRef.current.pause()
+      audioRef.current.pause();
     }
-  }
+  }, [isPlaying]);
+  
+  useEffect(() => {
+    dispatch(changePlaying(true))
+  }, [audioUrl]);
   
   return (
     <AudioPlayerWrapper>
@@ -39,15 +45,14 @@ export default function AudioPlayer() {
               ref={audioRef}
               src={audioUrl}
               preload="auto"
-              onPlay={() => dispatch(changePlaying())}
-              onPause={() => dispatch(changePlaying())}
+              // onPlay={() => dispatch(changePlaying(true))}
+              // onPause={() => dispatch(changePlaying(false))}
             />
             <Stack
               direction='row'
               alignItems='center'
               spacing={1}
             >
-              
               <TrackImage imageUrl={trackImageUrl} trackName={trackName} size={40}/>
               
               <Stack direction='column'>
