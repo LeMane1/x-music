@@ -2,22 +2,21 @@
 
 import {Container, Stack, Typography} from "@mui/material";
 import {useEffect, useRef} from "react";
-import {useAppDispatch, useAppSelector} from "@/lib/hooks";
+import {useAppDispatch, useAppSelector} from "@/lib/hooks/storeHooks";
 import {changePlaying} from "@/lib/slices/audioPlayerSlice";
 import TrackImage from "@/shared/TrackImage";
 import AudioPlayerWrapper from "@/components/audio-player/ui/AudioPlayerWrapper";
 import PlaybackProgressBar from "@/components/audio-player/ui/PlaybackProgressBar";
 import VolumeSlider from "@/components/audio-player/ui/VolumeSlider";
-import {useMediaQuery} from "@mui/system";
-import theme from "@/styles/theme";
 import ControlsButtons from "@/components/audio-player/ui/ControlsButtons";
+import {useBreakpoint} from "@/lib/hooks/useBreakpoint";
 
 export default function AudioPlayer() {
   const dispatch = useAppDispatch();
   const {audioUrl, trackImageUrl, trackName, trackArtistName} = useAppSelector(state => state.audioPlayerReducer.playerTrack);
   const {isPlaying} = useAppSelector(state => state.audioPlayerReducer)
   const audioRef = useRef<HTMLAudioElement | null>(null)
-  const isMdSize = useMediaQuery(theme.breakpoints.up('md'));
+  const isMdSize = useBreakpoint('md')
   
   useEffect(() => {
     if (!audioRef.current) return;
