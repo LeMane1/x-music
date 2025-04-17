@@ -7,8 +7,9 @@ import ListenedCounter from "@/app/search/tracks-list/ui/ListenedCounter";
 import DurationLabel from "@/app/search/tracks-list/ui/DurationLabel";
 import FavoritesCounter from "@/app/search/tracks-list/ui/FavoritesCounter";
 import TrackImage from "@/shared/TrackImage";
-import {useAppDispatch, useAppSelector} from "@/lib/hooks";
+import {useAppDispatch, useAppSelector} from "@/lib/hooks/storeHooks";
 import {changeCurrentTrack} from "@/lib/slices/audioPlayerSlice";
+import {useBreakpoint} from "@/lib/hooks/useBreakpoint";
 
 interface ITrackListItemProps {
   track: ITrack;
@@ -18,6 +19,8 @@ export default function TrackListItem({ track }: ITrackListItemProps) {
   const dispatch= useAppDispatch()
   const {trackId} = useAppSelector(state => state.audioPlayerReducer.playerTrack)
   const isPlaying = useAppSelector(state => state.audioPlayerReducer)
+  const isMdSize = useBreakpoint('md')
+  const isSmSize = useBreakpoint('sm')
   
   const handleOnClick = () => {
     dispatch(changeCurrentTrack({
@@ -50,20 +53,31 @@ export default function TrackListItem({ track }: ITrackListItemProps) {
         },
       }}
     >
-      <Stack direction="row" justifyContent="space-between" alignItems="center">
-        <Stack direction="row" spacing={2} alignItems="center">
+      <Stack direction="row" justifyContent="space-between" alignItems="center" spacing={1}>
+        <Stack direction="row" spacing={2} alignItems="center" sx={{
+          flexGrow: 1,
+          minWidth: 0
+        }}>
           <TrackImage
             imageUrl={track.image}
             trackName={track.name}
             showPlayingLabel={isPlaying && trackId === track.id}
+            sx={{
+              flexShrink: 0
+            }}
           />
           
-          <Stack direction="column" justifyContent='center'>
-            <Typography variant="subtitle2" component="h6" fontWeight={'bold'}>
+          <Stack direction="column" justifyContent='center' sx={{
+            minWidth: 0,
+            flexShrink: 1,
+            flexGrow: 1,
+            overflow: 'hidden',
+          }}>
+            <Typography variant="subtitle2" component="h6" fontWeight={'bold'} noWrap>
               {track.name}
             </Typography>
             
-            <Typography variant="caption" component="span" color={'textSecondary'}>
+            <Typography variant="caption" component="span" color={'textSecondary'} noWrap>
               {track.artist_name}
             </Typography>
           </Stack>
@@ -74,19 +88,22 @@ export default function TrackListItem({ track }: ITrackListItemProps) {
           alignItems="center"
           spacing={2}
           divider={<Divider orientation="vertical" flexItem />}
+          sx={{
+            flexShrink: 0
+          }}
         >
           {
-            track.musicinfo?.tags?.genres?.length > 0 &&
+            isMdSize && track.musicinfo?.tags?.genres?.length > 0 &&
             <GenresList genres={track.musicinfo.tags.genres}/>
           }
           
           {
-            track.stats.rate_listened_total &&
+            isSmSize && track.stats.rate_listened_total &&
             <ListenedCounter listenedCount={track.stats.rate_listened_total}/>
           }
           
           {
-            track.stats.favorited &&
+            isSmSize && track.stats.favorited &&
             <FavoritesCounter favoritesCount={track.stats.favorited}/>
           }
           
