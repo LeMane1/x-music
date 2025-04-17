@@ -3,7 +3,7 @@
 import {ITrack} from "@/api/types";
 import TrackListItem from "@/app/search/tracks-list/ui/TrackListItem";
 import {Box, Divider, Stack} from "@mui/material";
-import {useAppDispatch, useAppSelector} from "@/lib/hooks";
+import {useAppDispatch, useAppSelector} from "@/lib/hooks/storeHooks";
 import {useEffect} from "react";
 import {addTracks} from "@/lib/slices/mainSlice";
 import LoadButton from "@/app/search/tracks-list/ui/LoadButton";
@@ -37,7 +37,7 @@ export default function TracksList({preloadedTracks}: ITracksListProps) {
           />}
       >
         {
-          tracks && tracks.map((track: ITrack, index: number) => (
+          tracks && tracks.map((track: ITrack) => (
             <TrackListItem key={track.id} track={track}/>
           ))
         }

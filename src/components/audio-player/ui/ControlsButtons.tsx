@@ -6,7 +6,7 @@ import PauseIcon from "@mui/icons-material/Pause";
 import PlayArrowIcon from "@mui/icons-material/PlayArrow";
 import FastForwardIcon from "@mui/icons-material/FastForward";
 import {changeCurrentTime, changeCurrentTrack, changePlaying} from "@/lib/slices/audioPlayerSlice";
-import {useAppDispatch, useAppSelector} from "@/lib/hooks";
+import {useAppDispatch, useAppSelector} from "@/lib/hooks/storeHooks";
 import {RefObject} from "react";
 
 interface IControlsButtonsProps {

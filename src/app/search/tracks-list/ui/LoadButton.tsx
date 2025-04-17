@@ -1,7 +1,7 @@
 'use client'
 
 import {Button} from "@mui/material";
-import {useAppDispatch, useAppSelector} from "@/lib/hooks";
+import {useAppDispatch, useAppSelector} from "@/lib/hooks/storeHooks";
 import {addTracks, changeOffset} from "@/lib/slices/mainSlice";
 import {serverGetTracks} from "@/app/search/tracks-list/lib/actions";
 import {useSearchParams} from "next/navigation";

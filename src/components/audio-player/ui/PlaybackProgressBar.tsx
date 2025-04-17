@@ -2,7 +2,7 @@
 
 import {changeCurrentTime} from "@/lib/slices/audioPlayerSlice";
 import {Box, Slider, Typography} from "@mui/material";
-import {useAppDispatch, useAppSelector} from "@/lib/hooks";
+import {useAppDispatch, useAppSelector} from "@/lib/hooks/storeHooks";
 import {RefObject, useEffect} from "react";
 import {getDurationString} from "@/lib/functions/getDurationString";
 

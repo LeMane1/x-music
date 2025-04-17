@@ -5,7 +5,7 @@ import VolumeUpRounded from '@mui/icons-material/VolumeUpRounded';
 import VolumeDownRounded from '@mui/icons-material/VolumeDownRounded';
 import {RefObject} from "react";
 import {changeCurrentVolume} from "@/lib/slices/audioPlayerSlice";
-import {useAppDispatch, useAppSelector} from "@/lib/hooks";
+import {useAppDispatch, useAppSelector} from "@/lib/hooks/storeHooks";
 
 interface IVolumeSliderProps {
   audioRef: RefObject<HTMLAudioElement | null>;
