@@ -1,5 +1,5 @@
 import Image from "next/image";
-import {Box} from "@mui/material";
+import {Box, SxProps} from "@mui/material";
 import PlayingLabel from "@/shared/PlayingLabel";
 
 interface ITrackImageProps {
@@ -7,13 +7,15 @@ interface ITrackImageProps {
   trackName: string;
   size?: number;
   showPlayingLabel?: boolean;
+  sx?: SxProps;
 }
 
-export default function TrackImage({ imageUrl, trackName, size = 40, showPlayingLabel = false}: ITrackImageProps) {
+export default function TrackImage({ imageUrl, trackName, size = 40, showPlayingLabel = false, sx}: ITrackImageProps) {
   return (
     <Box
       data-id="track-list-item-image"
       sx={{
+        ...sx,
         width: size,
         height: size,
         overflow: 'hidden',
