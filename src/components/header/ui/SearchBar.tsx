@@ -15,8 +15,6 @@ export default function SearchBar() {
     const params = new URLSearchParams(searchParams);
     const searchValue = params.get('search')
     
-    console.log(searchValue)
-    
     if (searchValue) setInputValue(searchValue)
   },[searchParams])
   
