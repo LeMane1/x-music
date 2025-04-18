@@ -15,7 +15,6 @@ interface ITracksListProps {
 export default function TracksList({preloadedTracks}: ITracksListProps) {
   const tracks = useAppSelector(state => state.mainReducer.tracks);
   const dispatch = useAppDispatch();
-  const offset = useAppSelector(state => state.mainReducer.offset)
   
   useEffect(() => {
     if (preloadedTracks) {
