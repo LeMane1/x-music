@@ -2,7 +2,7 @@
 
 import {ITrack} from "@/api/types";
 import TrackListItem from "@/app/search/tracks-list/ui/TrackListItem";
-import {Box, Divider, Stack} from "@mui/material";
+import {Box, Divider, Stack, Typography} from "@mui/material";
 import {useAppDispatch, useAppSelector} from "@/lib/hooks/storeHooks";
 import {useEffect} from "react";
 import {prepareQueue} from "@/lib/slices/mainSlice";
@@ -17,7 +17,7 @@ export default function TracksList({preloadedTracks}: ITracksListProps) {
   const dispatch = useAppDispatch();
   
   useEffect(() => {
-    if (preloadedTracks) {
+    if (preloadedTracks && preloadedTracks.length > 0) {
       dispatch(prepareQueue(preloadedTracks));
     }
   }, [preloadedTracks]);
@@ -39,9 +39,14 @@ export default function TracksList({preloadedTracks}: ITracksListProps) {
           />}
       >
         {
-          tracks && tracks.map((track: ITrack, index: number) => (
-            <TrackListItem key={track.id + index} track={track}/>
-          ))
+          tracks && tracks.length > 0 ?
+            tracks.map((track: ITrack, index: number) => (
+              <TrackListItem key={track.id + index} track={track}/>
+            ))
+            :
+            <Typography variant='subtitle1' component='span'>
+              No tracks found
+            </Typography>
         }
       </Stack>
       

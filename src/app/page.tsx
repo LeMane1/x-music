@@ -1,12 +1,12 @@
+import ContainerLayout from "@/lib/ContainerLayout";
+import HelloBlock from "@/components/hello-block";
+
 export default function Home() {
   return (
-    <div>
-      <main>
-      
-      
-
-      
-      </main>
-    </div>
+    <main>
+      <ContainerLayout>
+        <HelloBlock/>
+      </ContainerLayout>
+    </main>
   );
 }

@@ -16,10 +16,12 @@ export default function AudioPlayer() {
   const audioRef = useRef<HTMLAudioElement | null>(null)
   const isMdSize = useBreakpoint('md')
   
+  if (!audioUrl) return null;
+  
   return (
     <AudioPlayerWrapper>
       {
-        audioUrl ?
+        audioUrl &&
           <Container disableGutters>
             <Box
               component='audio'
@@ -68,10 +70,6 @@ export default function AudioPlayer() {
               {isMdSize && <VolumeSlider audioRef={audioRef}/>}
             </Stack>
           </Container>
-          :
-          <Typography variant='subtitle1' color='textSecondary'>
-            Track is not selected
-          </Typography>
       }
     </AudioPlayerWrapper>
   )
