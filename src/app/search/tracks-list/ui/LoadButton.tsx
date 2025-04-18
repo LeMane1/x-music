@@ -2,7 +2,7 @@
 
 import {Button} from "@mui/material";
 import {useAppDispatch, useAppSelector} from "@/lib/hooks/storeHooks";
-import {addTracks, changeOffset} from "@/lib/slices/mainSlice";
+import {addTracksToQueue} from "@/lib/slices/mainSlice";
 import {serverGetTracks} from "@/app/search/tracks-list/lib/actions";
 import {useSearchParams} from "next/navigation";
 import {useState} from "react";
@@ -20,8 +20,7 @@ export default function LoadButton(){
       const tracks = await serverGetTracks(searchValue, offset)
       
       if (tracks){
-        dispatch(addTracks(tracks))
-        dispatch(changeOffset(offset + 10))
+        dispatch(addTracksToQueue(tracks))
       }
       setIsLoading(false);
     }

@@ -5,7 +5,7 @@ import TrackListItem from "@/app/search/tracks-list/ui/TrackListItem";
 import {Box, Divider, Stack} from "@mui/material";
 import {useAppDispatch, useAppSelector} from "@/lib/hooks/storeHooks";
 import {useEffect} from "react";
-import {addTracks} from "@/lib/slices/mainSlice";
+import {prepareQueue} from "@/lib/slices/mainSlice";
 import LoadButton from "@/app/search/tracks-list/ui/LoadButton";
 
 interface ITracksListProps {
@@ -15,10 +15,13 @@ interface ITracksListProps {
 export default function TracksList({preloadedTracks}: ITracksListProps) {
   const tracks = useAppSelector(state => state.mainReducer.tracks);
   const dispatch = useAppDispatch();
+  const offset = useAppSelector(state => state.mainReducer.offset)
   
   useEffect(() => {
-    if (preloadedTracks) dispatch(addTracks(preloadedTracks));
-  }, []);
+    if (preloadedTracks) {
+      dispatch(prepareQueue(preloadedTracks));
+    }
+  }, [preloadedTracks]);
   
   return (
     <>
@@ -32,13 +35,13 @@ export default function TracksList({preloadedTracks}: ITracksListProps) {
             sx={{
               marginLeft: 9,
               marginRight: 2,
-              opacity: .2
+              opacity: .3
             }}
           />}
       >
         {
-          tracks && tracks.map((track: ITrack) => (
-            <TrackListItem key={track.id} track={track}/>
+          tracks && tracks.map((track: ITrack, index: number) => (
+            <TrackListItem key={track.id + index} track={track}/>
           ))
         }
       </Stack>

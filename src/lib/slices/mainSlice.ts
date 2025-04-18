@@ -16,8 +16,16 @@ export const mainSlice = createSlice({
   name: 'main',
   initialState,
   reducers: {
-    addTracks: (state, action: PayloadAction<ITrack[]>) => {
+    addTracksToQueue: (state, action: PayloadAction<ITrack[]>) => {
       state.tracks = [...state.tracks, ...action.payload]
+      state.offset = state.offset + 10
+    },
+    cleanQueue: (state) => {
+      state.tracks = []
+    },
+    prepareQueue: (state, action: PayloadAction<ITrack[]>) => {
+      state.tracks = [...action.payload]
+      state.offset = 10
     },
     changeOffset: (state, action: PayloadAction<number>) => {
       state.offset = action.payload
@@ -28,7 +36,9 @@ export const mainSlice = createSlice({
 // Action creators are generated for each case reducer function
 export const {
   changeOffset,
-  addTracks
+  addTracksToQueue,
+  cleanQueue,
+  prepareQueue
 } = mainSlice.actions
 
 export default mainSlice.reducer

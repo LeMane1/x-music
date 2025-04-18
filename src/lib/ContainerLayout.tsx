@@ -1,5 +1,6 @@
 import {Container, Stack} from "@mui/material";
 import AudioPlayer from "@/components/audio-player";
+import Header from "@/components/header";
 
 export default function ContainerLayout(
   {
@@ -7,16 +8,14 @@ export default function ContainerLayout(
   }: Readonly<{children: React.ReactNode}>){
   return (
     <Stack direction="column"
-           sx={{
-             minHeight: '100vh',
-             justifyContent: 'space-between',
-           }}
+       sx={{
+         minHeight: '100vh',
+         paddingTop: '60px',
+         paddingBottom: '60px',
+       }}
     >
-      <Container
-        maxWidth="lg"
-        sx={{
-          padding: 2,
-      }}>
+      <Header/>
+      <Container maxWidth="lg">
         {children}
       </Container>
       
