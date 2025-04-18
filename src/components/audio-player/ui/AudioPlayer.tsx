@@ -1,47 +1,35 @@
 'use client'
 
-import {Container, Stack, Typography} from "@mui/material";
-import {useEffect, useRef} from "react";
-import {useAppDispatch, useAppSelector} from "@/lib/hooks/storeHooks";
-import {changePlaying} from "@/lib/slices/audioPlayerSlice";
+import {Container, Stack, Typography, Box} from "@mui/material";
+import {useRef} from "react";
+import {useAppSelector} from "@/lib/hooks/storeHooks";
 import TrackImage from "@/shared/TrackImage";
 import AudioPlayerWrapper from "@/components/audio-player/ui/AudioPlayerWrapper";
 import PlaybackProgressBar from "@/components/audio-player/ui/PlaybackProgressBar";
 import VolumeSlider from "@/components/audio-player/ui/VolumeSlider";
 import ControlsButtons from "@/components/audio-player/ui/ControlsButtons";
 import {useBreakpoint} from "@/lib/hooks/useBreakpoint";
+import AudioController from "@/components/audio-player/ui/AudioController";
 
 export default function AudioPlayer() {
-  const dispatch = useAppDispatch();
   const {audioUrl, trackImageUrl, trackName, trackArtistName} = useAppSelector(state => state.audioPlayerReducer.playerTrack);
-  const {isPlaying} = useAppSelector(state => state.audioPlayerReducer)
   const audioRef = useRef<HTMLAudioElement | null>(null)
   const isMdSize = useBreakpoint('md')
-  
-  useEffect(() => {
-    if (!audioRef.current) return;
-    
-    if (isPlaying) {
-      audioRef.current.play();
-    } else {
-      audioRef.current.pause();
-    }
-  }, [isPlaying]);
-  
-  useEffect(() => {
-    dispatch(changePlaying(true))
-  }, [audioUrl]);
   
   return (
     <AudioPlayerWrapper>
       {
         audioUrl ?
           <Container disableGutters>
-            <audio
+            <Box
+              component='audio'
               ref={audioRef}
               src={audioUrl}
               preload="auto"
             />
+            
+            <AudioController audioRef={audioRef}/>
+            
             <Stack
               direction='row'
               alignItems='center'

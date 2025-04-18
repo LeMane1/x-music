@@ -3,7 +3,7 @@
 import {changeCurrentTime} from "@/lib/slices/audioPlayerSlice";
 import {Box, Slider, Typography} from "@mui/material";
 import {useAppDispatch, useAppSelector} from "@/lib/hooks/storeHooks";
-import {RefObject, useEffect} from "react";
+import {RefObject} from "react";
 import {getDurationString} from "@/lib/functions/getDurationString";
 
 interface IPlaybackProgressBarProps {
@@ -13,19 +13,7 @@ interface IPlaybackProgressBarProps {
 export default function PlaybackProgressBar({audioRef}: IPlaybackProgressBarProps) {
   const dispatch = useAppDispatch();
   const {trackDuration} = useAppSelector(state => state.audioPlayerReducer.playerTrack);
-  const {isPlaying, currentTime} = useAppSelector(state => state.audioPlayerReducer)
-  
-  useEffect(() => {
-    let intervalId: number = 0
-    if (isPlaying){
-      intervalId = window.setInterval(() => {
-        dispatch(changeCurrentTime(Math.round(audioRef?.current?.currentTime ?? 0)))
-      }, 1000)
-    }
-    return () => {
-      clearInterval(intervalId)
-    }
-  }, [isPlaying])
+  const {currentTime} = useAppSelector(state => state.audioPlayerReducer)
   
   const handleOnChange = (_: unknown, value: number) => {
     if (audioRef.current) {

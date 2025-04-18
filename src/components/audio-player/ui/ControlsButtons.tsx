@@ -40,6 +40,8 @@ export default function ControlsButtons({audioRef}: IControlsButtonsProps) {
         trackDuration: prevTrack.duration,
         audioUrl: prevTrack.audio
       }))
+    }else{
+      dispatch(changePlaying(false))
     }
   }
   
@@ -56,6 +58,8 @@ export default function ControlsButtons({audioRef}: IControlsButtonsProps) {
         trackDuration: nextTrack.duration,
         audioUrl: nextTrack.audio
       }))
+    }else{
+      dispatch(changePlaying(false))
     }
   }
   
