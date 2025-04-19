@@ -1,6 +1,7 @@
-import {Box, Container, Typography} from "@mui/material";
+import {Box, Container} from "@mui/material";
 import SearchBar from "@/components/header/ui/SearchBar";
 import Image from 'next/image'
+import Link from "next/link";
 
 export default function Header() {
   return (
@@ -30,12 +31,14 @@ export default function Header() {
             alignItems: 'center',
             gap: 1,
         }}>
-          <Image
-            src={'/icons/logo.svg'}
-            alt='X Music'
-            width={80}
-            height={40}
-          />
+          <Link href={'/'}>
+            <Image
+              src={'/icons/logo.svg'}
+              alt='X Music'
+              width={80}
+              height={40}
+            />
+          </Link>
           
           <SearchBar/>
         </Box>
