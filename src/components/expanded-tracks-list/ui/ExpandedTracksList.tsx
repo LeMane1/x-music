@@ -14,6 +14,7 @@ interface IExpandedTracksListProps {
   showLoadButton?: boolean;
   handleOnLoadButtonClick?: () => void;
   isLoading?: boolean;
+  showDownloadButton?: boolean;
 }
 
 export default function ExpandedTracksList(
@@ -23,6 +24,7 @@ export default function ExpandedTracksList(
     showLoadButton,
     handleOnLoadButtonClick,
     isLoading,
+    showDownloadButton = false
   }: IExpandedTracksListProps) {
   const {tracks} = useAppSelector(state => state.mainReducer);
   const dispatch = useAppDispatch();
@@ -55,7 +57,9 @@ export default function ExpandedTracksList(
               <ExpandedTrackItem
                 key={track.id + index}
                 track={track}
-                onClick={(track) => handleTrackItemOnClick({dispatch,track, tracks, queueType, playerQueueType})} />
+                onClick={(track) => handleTrackItemOnClick({dispatch,track, tracks, queueType, playerQueueType})}
+                showDownloadButton={showDownloadButton}
+              />
             ))
             :
             <Typography variant='subtitle1' component='span'>

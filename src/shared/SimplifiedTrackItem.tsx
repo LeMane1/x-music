@@ -1,18 +1,20 @@
 'use client'
 
-import {Box, Divider, Stack, Typography} from "@mui/material";
+import {Box, IconButton, Stack, Typography} from "@mui/material";
 import {ITrack} from "@/api/types";
 import TrackImage from "@/shared/TrackImage";
 import DurationLabel from "@/app/search/tracks-list/ui/DurationLabel";
 import {useAppSelector} from "@/lib/hooks/storeHooks";
+import ArrowDownwardIcon from "@mui/icons-material/ArrowDownward";
 
 interface ISimplifiedTrackItemProps {
   track: ITrack;
   onClick: (track: ITrack) => void;
   children?: React.ReactNode;
+  showDownloadButton?: boolean;
 }
 
-export default function SimplifiedTrackItem({track, onClick, children}: ISimplifiedTrackItemProps) {
+export default function SimplifiedTrackItem({track, onClick, children, showDownloadButton = false}: ISimplifiedTrackItemProps) {
   const {trackId} = useAppSelector(state => state.audioPlayerReducer.playerTrack)
   const isPlaying = useAppSelector(state => state.audioPlayerReducer)
   
@@ -72,13 +74,20 @@ export default function SimplifiedTrackItem({track, onClick, children}: ISimplif
           direction="row"
           alignItems="center"
           spacing={2}
-          divider={<Divider orientation="vertical" flexItem />}
-          sx={{
-            flexShrink: 0
-          }}
+          sx={{flexShrink: 0}}
         >
           {children}
           <DurationLabel duration={track.duration}/>
+          
+          {
+            showDownloadButton && <IconButton
+              href={track.audiodownload}
+              onClick={(e) => e.stopPropagation()}
+              disabled={!track.audiodownload_allowed}
+            >
+              <ArrowDownwardIcon/>
+            </IconButton>
+          }
         </Stack>
       </Stack>
     </Box>

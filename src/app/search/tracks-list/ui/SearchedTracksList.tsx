@@ -6,6 +6,7 @@ import {handleOnLoadButtonClick} from "@/lib/handlers/handleOnLoadButtonClick";
 import {serverGetSearchedTracksAction} from "@/app/search/tracks-list/lib/actions";
 import {useState} from "react";
 import {useAppDispatch, useAppSelector} from "@/lib/hooks/storeHooks";
+import {useBreakpoint} from "@/lib/hooks/useBreakpoint";
 
 interface ISearchedTracksListProps {
   preloadedTracks: ITrack[] | null;
@@ -17,6 +18,7 @@ export default function SearchedTracksList({preloadedTracks, searchName}: ISearc
   const dispatch = useAppDispatch();
   const queueType = useAppSelector(state => state.audioPlayerReducer.queueType)
   const {offset} = useAppSelector(state => state.mainReducer);
+  const isSmSize = useBreakpoint('sm')
   
   const handleOnClick = () => {
     if (searchName) {
@@ -38,6 +40,7 @@ export default function SearchedTracksList({preloadedTracks, searchName}: ISearc
       handleOnLoadButtonClick={handleOnClick}
       showLoadButton={true}
       isLoading={isLoading}
+      showDownloadButton={isSmSize}
     />
   )
 }

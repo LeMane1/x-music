@@ -12,11 +12,20 @@ interface ISimplifiedTracksListProps {
   playerQueueType: queueTypes;
   preloadedTracks: ITrack[] | null;
   showLoadButton?: boolean;
+  showDownloadButton?: boolean;
   handleOnLoadButtonClick?: () => void;
   isLoading?: boolean;
 }
 
-export default function SimplifiedTracksList({preloadedTracks, playerQueueType, showLoadButton = false, handleOnLoadButtonClick, isLoading = false}: ISimplifiedTracksListProps) {
+export default function SimplifiedTracksList(
+  {
+    preloadedTracks,
+    playerQueueType,
+    showLoadButton = false,
+    handleOnLoadButtonClick,
+    isLoading = false,
+    showDownloadButton = false,
+  }: ISimplifiedTracksListProps) {
   const dispatch = useAppDispatch();
   const queueType = useAppSelector(state => state.audioPlayerReducer.queueType)
   const {tracks} = useAppSelector(state => state.mainReducer);
@@ -35,6 +44,7 @@ export default function SimplifiedTracksList({preloadedTracks, playerQueueType, 
               <SimplifiedTrackItem
                 track={track}
                 onClick={(track) => handleTrackItemOnClick({dispatch,track, tracks, queueType, playerQueueType})}
+                showDownloadButton={showDownloadButton}
               />
             </Grid>
           ))

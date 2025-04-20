@@ -10,14 +10,19 @@ import {useBreakpoint} from "@/lib/hooks/useBreakpoint";
 interface IExpandedTrackItemProps {
   track: ITrack;
   onClick: (track: ITrack) => void;
+  showDownloadButton?: boolean;
 }
 
-export default function ExpandedTrackItem({track, onClick}: IExpandedTrackItemProps) {
+export default function ExpandedTrackItem({track, onClick, showDownloadButton = false}: IExpandedTrackItemProps) {
   const isMdSize = useBreakpoint('md')
   const isSmSize = useBreakpoint('sm')
   
   return (
-    <SimplifiedTrackItem track={track} onClick={onClick}>
+    <SimplifiedTrackItem
+      track={track}
+      onClick={onClick}
+      showDownloadButton={showDownloadButton}
+    >
       <>
         {
           isMdSize && track.musicinfo?.tags?.genres?.length > 0 &&
@@ -30,7 +35,7 @@ export default function ExpandedTrackItem({track, onClick}: IExpandedTrackItemPr
         }
         
         {
-          isSmSize && track.stats.favorited &&
+          isSmSize && track.stats.favorited > 0 &&
           <FavoritesCounter favoritesCount={track.stats.favorited}/>
         }
       </>
