@@ -28,7 +28,7 @@ export default function SimplifiedTracksList({preloadedTracks, playerQueueType, 
       isLoading={isLoading}
       showLoadButton={showLoadButton}
     >
-      <Grid container spacing={2} sx={{width: "100%"}}>
+      <Grid container spacing={1} sx={{width: "100%"}}>
         {
           tracks && tracks.length > 0 && tracks.map((track) => (
             <Grid size={{ xs: 12, sm: 12, md: 6 }} key={track.id}>

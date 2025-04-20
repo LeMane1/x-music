@@ -76,9 +76,12 @@ export default function HelloBlock() {
             color='primary'
             size={'large'}
             sx={{
-              width: 'fit-content',
+              width: {
+                xs: '100%',
+                sm: 'fit-content'
+              },
           }}>
-            Let's go!
+            Let's go
           </Button>
         </Stack>
       </Grid>
