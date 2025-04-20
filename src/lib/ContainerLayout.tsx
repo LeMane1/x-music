@@ -1,5 +1,4 @@
 import {Container, Stack} from "@mui/material";
-import AudioPlayer from "@/components/audio-player";
 import Header from "@/components/header";
 
 export default function ContainerLayout(
@@ -18,8 +17,6 @@ export default function ContainerLayout(
       <Container maxWidth="lg">
         {children}
       </Container>
-      
-      <AudioPlayer/>
     </Stack>
   )
 }

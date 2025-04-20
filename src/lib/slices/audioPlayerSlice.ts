@@ -1,5 +1,8 @@
 import { createSlice } from '@reduxjs/toolkit'
 import type { PayloadAction } from '@reduxjs/toolkit'
+import {ITrack} from "@/api/types";
+
+export type queueTypes = undefined | 'popular-week' | 'searched'
 
 interface IAudioPlayerTrack{
   trackId: string;
@@ -15,6 +18,8 @@ export interface AudioPlayerState{
   isPlaying: boolean;
   currentTime: number;
   currentVolume: number;
+  playerQueue: ITrack[];
+  queueType: queueTypes;
 }
 
 const initialState: AudioPlayerState = {
@@ -28,7 +33,9 @@ const initialState: AudioPlayerState = {
   },
   isPlaying: false,
   currentTime: 0,
-  currentVolume: 0.5
+  currentVolume: 0.5,
+  playerQueue: [],
+  queueType: undefined
 }
 
 export const audioPlayerSlice = createSlice({
@@ -48,6 +55,12 @@ export const audioPlayerSlice = createSlice({
     },
     changeCurrentVolume: (state, action: PayloadAction<number>) => {
       state.currentVolume = action.payload
+    },
+    setTracksQueue: (state, action: PayloadAction<ITrack[]>) => {
+      state.playerQueue = action.payload
+    },
+    addTracksToPlayerQueue: (state, action: PayloadAction<ITrack[]>) => {
+      state.playerQueue = [...state.playerQueue, ...action.payload]
     }
   },
 })
@@ -57,7 +70,9 @@ export const {
   changeCurrentTrack,
   changePlaying,
   changeCurrentTime,
-  changeCurrentVolume
+  changeCurrentVolume,
+  setTracksQueue,
+  addTracksToPlayerQueue
 } = audioPlayerSlice.actions
 
 export default audioPlayerSlice.reducer

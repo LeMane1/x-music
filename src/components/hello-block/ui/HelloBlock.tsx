@@ -35,7 +35,7 @@ export default function HelloBlock() {
                 },
               }}
             >
-              Search{' '}
+              Search for{' '}
               <Box
                 component='span'
                 sx={{
@@ -50,7 +50,23 @@ export default function HelloBlock() {
             </Typography>
             
             <Typography variant='body1' component='span' color={'textSecondary'}>
-              A place where you can find music depending your feel and mood. Jamendo API provides thousands of tracks for you.
+              A place where you can find music that suits your tastes and mood.{' '}
+              <Box
+                component='a'
+                fontWeight={'bold'}
+                href={'https://developer.jamendo.com/v3.0'}
+                target="_blank"
+                sx={{
+                  display: 'inline',
+                  color: 'white',
+                  '&:hover':{
+                    cursor: 'pointer',
+                    textDecoration: 'underline',
+                  }
+              }}>
+                Jamendo API{' '}
+              </Box>
+              provides thousands of tracks for you.
             </Typography>
           </Stack>
           

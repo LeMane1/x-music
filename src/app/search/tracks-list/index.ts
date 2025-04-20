@@ -1,1 +1,1 @@
-export {default} from './ui/TracksList'
+export {default} from './ui/SearchedTracksList'

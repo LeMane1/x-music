@@ -3,7 +3,7 @@
 import {fetchWithRetries} from "@/api/fetchDataWithRetries";
 import {IGetTracksResponse} from "@/api/types";
 
-export async function serverGetTracks(searchValue: string, offset: number) {
+export async function serverGetSearchedTracksAction(searchValue: string, offset: number) {
   const getTracksResponse = await fetchWithRetries<IGetTracksResponse>({
     url: '/v3.0/tracks/',
     searchParams: {

@@ -1,46 +1,31 @@
 'use client'
 
-import {ITrack} from "@/api/types";
 import {Box, Divider, Stack, Typography} from "@mui/material";
-import GenresList from "@/app/search/tracks-list/ui/GenresList";
-import ListenedCounter from "@/app/search/tracks-list/ui/ListenedCounter";
-import DurationLabel from "@/app/search/tracks-list/ui/DurationLabel";
-import FavoritesCounter from "@/app/search/tracks-list/ui/FavoritesCounter";
+import {ITrack} from "@/api/types";
 import TrackImage from "@/shared/TrackImage";
-import {useAppDispatch, useAppSelector} from "@/lib/hooks/storeHooks";
-import {changeCurrentTrack} from "@/lib/slices/audioPlayerSlice";
-import {useBreakpoint} from "@/lib/hooks/useBreakpoint";
+import DurationLabel from "@/app/search/tracks-list/ui/DurationLabel";
+import {useAppSelector} from "@/lib/hooks/storeHooks";
 
-interface ITrackListItemProps {
+interface ISimplifiedTrackItemProps {
   track: ITrack;
+  onClick: (track: ITrack) => void;
+  children?: React.ReactNode;
 }
 
-export default function TrackListItem({ track }: ITrackListItemProps) {
-  const dispatch= useAppDispatch()
+export default function SimplifiedTrackItem({track, onClick, children}: ISimplifiedTrackItemProps) {
   const {trackId} = useAppSelector(state => state.audioPlayerReducer.playerTrack)
   const isPlaying = useAppSelector(state => state.audioPlayerReducer)
-  const isMdSize = useBreakpoint('md')
-  const isSmSize = useBreakpoint('sm')
-  
-  const handleOnClick = () => {
-    dispatch(changeCurrentTrack({
-      trackId: track.id,
-      trackName: track.name,
-      trackArtistName: track.artist_name,
-      trackImageUrl: track.image,
-      trackDuration: track.duration,
-      audioUrl: track.audio
-    }))
-  }
   
   return (
     <Box
-      onClick={handleOnClick}
+      onClick={() => onClick(track)}
       borderRadius={2}
       py={1}
       px={2}
       sx={{
         opacity: .9,
+        width: '100%',
+        height: 60,
         '&:hover':{
           backgroundColor: "#232323",
           cursor: "pointer",
@@ -92,21 +77,7 @@ export default function TrackListItem({ track }: ITrackListItemProps) {
             flexShrink: 0
           }}
         >
-          {
-            isMdSize && track.musicinfo?.tags?.genres?.length > 0 &&
-            <GenresList genres={track.musicinfo.tags.genres}/>
-          }
-          
-          {
-            isSmSize && track.stats.rate_listened_total &&
-            <ListenedCounter listenedCount={track.stats.rate_listened_total}/>
-          }
-          
-          {
-            isSmSize && track.stats.favorited &&
-            <FavoritesCounter favoritesCount={track.stats.favorited}/>
-          }
-          
+          {children}
           <DurationLabel duration={track.duration}/>
         </Stack>
       </Stack>

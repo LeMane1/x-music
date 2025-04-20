@@ -1,7 +1,7 @@
 import {fetchWithRetries} from "@/api/fetchDataWithRetries";
 import {IGetTracksResponse} from "@/api/types";
-import TracksList from "@/app/search/tracks-list";
 import {Divider, Stack, Typography} from "@mui/material";
+import SearchedTracksList from "@/app/search/tracks-list/ui/SearchedTracksList";
 
 export default async function SearchPage(props: {
   searchParams?: Promise<{
@@ -31,7 +31,7 @@ export default async function SearchPage(props: {
         <Divider orientation={'horizontal'}/>
       </Stack>
       
-      <TracksList preloadedTracks={tracks}/>
+      <SearchedTracksList preloadedTracks={tracks}/>
     </Stack>
   )
 }
