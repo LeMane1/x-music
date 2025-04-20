@@ -14,7 +14,6 @@ export default function AudioPlayerWrapper({children}: IAudioPlayerWrapperProps)
   return (
     <Box sx={{
       position: 'fixed',
-      // bottom: isLgSize ? 12 : 0,
       bottom: 12,
       paddingLeft: isLgSize ? 0 : 2,
       paddingRight: isLgSize ? 0 : 2,
@@ -27,7 +26,6 @@ export default function AudioPlayerWrapper({children}: IAudioPlayerWrapperProps)
       <Container
         maxWidth='lg'
         sx={{
-          // borderRadius: isLgSize ? 2 : 0,
           borderRadius: 2,
           backgroundColor: "rgba(115,115,115,0.2)",
           backdropFilter: 'blur(20px)',
