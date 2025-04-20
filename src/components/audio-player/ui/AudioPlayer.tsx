@@ -10,6 +10,7 @@ import VolumeSlider from "@/components/audio-player/ui/VolumeSlider";
 import ControlsButtons from "@/components/audio-player/ui/ControlsButtons";
 import {useBreakpoint} from "@/lib/hooks/useBreakpoint";
 import AudioController from "@/components/audio-player/ui/AudioController";
+import ExpandButton from "./ExpandButton";
 
 export default function AudioPlayer() {
   const {audioUrl, trackImageUrl, trackName, trackArtistName} = useAppSelector(state => state.audioPlayerReducer.playerTrack);
@@ -69,6 +70,8 @@ export default function AudioPlayer() {
               {isMdSize && <PlaybackProgressBar audioRef={audioRef}/>}
               
               {isMdSize && <VolumeSlider audioRef={audioRef}/>}
+              
+              {isMdSize && <ExpandButton/>}
             </Stack>
           </Container>
       }
