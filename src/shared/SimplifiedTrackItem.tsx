@@ -81,7 +81,7 @@ export default function SimplifiedTrackItem({track, onClick, children, showDownl
           
           {
             showDownloadButton && <IconButton
-              href={track.audiodownload ?? ''}
+              href={track.audiodownload ?? null}
               onClick={(e) => e.stopPropagation()}
               disabled={!(track.audiodownload_allowed || track.audiodownload)}
             >
