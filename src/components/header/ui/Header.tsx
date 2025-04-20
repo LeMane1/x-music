@@ -37,6 +37,7 @@ export default function Header() {
               alt='X Music'
               width={80}
               height={40}
+              style={{ display: 'block' }}
             />
           </Link>
           
