@@ -11,9 +11,10 @@ import {RefObject} from "react";
 
 interface IControlsButtonsProps {
   audioRef: RefObject<HTMLAudioElement | null>;
+  showFullControlsSet?: boolean;
 }
 
-export default function ControlsButtons({audioRef}: IControlsButtonsProps) {
+export default function ControlsButtons({audioRef, showFullControlsSet = true}: IControlsButtonsProps) {
   const dispatch = useAppDispatch();
   const {isPlaying, currentTime} = useAppSelector(state => state.audioPlayerReducer)
   const tracks = useAppSelector(state => state.mainReducer.tracks)
@@ -65,9 +66,9 @@ export default function ControlsButtons({audioRef}: IControlsButtonsProps) {
   
   return (
     <Stack direction='row'>
-      <IconButton onClick={handleBackwardTrack}>
+      {showFullControlsSet && <IconButton onClick={handleBackwardTrack}>
         <FastRewindIcon/>
-      </IconButton>
+      </IconButton>}
       
       <IconButton onClick={togglePlayback}>
         {isPlaying ? <PauseIcon/> : <PlayArrowIcon/>}

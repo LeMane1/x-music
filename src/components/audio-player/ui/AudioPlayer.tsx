@@ -15,6 +15,7 @@ export default function AudioPlayer() {
   const {audioUrl, trackImageUrl, trackName, trackArtistName} = useAppSelector(state => state.audioPlayerReducer.playerTrack);
   const audioRef = useRef<HTMLAudioElement | null>(null)
   const isMdSize = useBreakpoint('md')
+  const isSmSize = useBreakpoint('sm')
   
   if (!audioUrl) return null;
   
@@ -63,7 +64,7 @@ export default function AudioPlayer() {
                 </Stack>
               </Stack>
               
-              <ControlsButtons audioRef={audioRef}/>
+              <ControlsButtons audioRef={audioRef} showFullControlsSet={isSmSize}/>
               
               {isMdSize && <PlaybackProgressBar audioRef={audioRef}/>}
               
