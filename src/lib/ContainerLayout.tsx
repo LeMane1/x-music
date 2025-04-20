@@ -1,5 +1,6 @@
 import {Container, Stack} from "@mui/material";
 import Header from "@/components/header";
+import {Suspense} from "react";
 
 export default function ContainerLayout(
   {
@@ -13,7 +14,9 @@ export default function ContainerLayout(
          paddingBottom: '60px',
        }}
     >
-      <Header/>
+      <Suspense fallback={null}>
+        <Header/>
+      </Suspense>
       <Container maxWidth="lg">
         {children}
       </Container>

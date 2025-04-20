@@ -31,7 +31,7 @@ export default async function SearchPage(props: {
         <Divider orientation={'horizontal'}/>
       </Stack>
       
-      <SearchedTracksList preloadedTracks={tracks}/>
+      <SearchedTracksList preloadedTracks={tracks} searchName={searchName}/>
     </Stack>
   )
 }

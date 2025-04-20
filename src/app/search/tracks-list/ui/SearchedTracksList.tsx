@@ -5,31 +5,28 @@ import {ITrack} from "@/api/types";
 import {handleOnLoadButtonClick} from "@/lib/handlers/handleOnLoadButtonClick";
 import {serverGetSearchedTracksAction} from "@/app/search/tracks-list/lib/actions";
 import {useState} from "react";
-import {useSearchParams} from "next/navigation";
 import {useAppDispatch, useAppSelector} from "@/lib/hooks/storeHooks";
 
 interface ISearchedTracksListProps {
   preloadedTracks: ITrack[] | null;
+  searchName: string;
 }
 
-export default function SearchedTracksList({preloadedTracks}: ISearchedTracksListProps) {
+export default function SearchedTracksList({preloadedTracks, searchName}: ISearchedTracksListProps) {
   const [isLoading, setIsLoading] = useState<boolean>(false);
-  const searchParams = useSearchParams()
   const dispatch = useAppDispatch();
   const queueType = useAppSelector(state => state.audioPlayerReducer.queueType)
   const {offset} = useAppSelector(state => state.mainReducer);
   
   const handleOnClick = () => {
-    const searchValue = searchParams.get('search')
-    
-    if (searchValue) {
+    if (searchName) {
       handleOnLoadButtonClick({
         dispatch,
         queueType,
         playerQueueType: 'searched',
         setIsLoading,
         serverActionCallback: serverGetSearchedTracksAction,
-        serverActionArgs: [searchValue, offset]
+        serverActionArgs: [searchName, offset]
       })
     }
   }

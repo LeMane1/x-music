@@ -70,10 +70,15 @@ export default function HelloBlock() {
             </Typography>
           </Stack>
           
-          <Button variant='contained' color='primary' size={'large'} sx={{
-            width: 'fit-content',
+          <Button
+            href={'/search?search=rock'}
+            variant='contained'
+            color='primary'
+            size={'large'}
+            sx={{
+              width: 'fit-content',
           }}>
-            Start search music
+            Let's go!
           </Button>
         </Stack>
       </Grid>
