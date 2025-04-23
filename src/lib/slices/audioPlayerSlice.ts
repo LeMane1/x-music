@@ -20,6 +20,7 @@ export interface AudioPlayerState{
   currentVolume: number;
   playerQueue: ITrack[];
   queueType: queueTypes;
+  isExpanded: boolean;
 }
 
 const initialState: AudioPlayerState = {
@@ -35,7 +36,8 @@ const initialState: AudioPlayerState = {
   currentTime: 0,
   currentVolume: 0.5,
   playerQueue: [],
-  queueType: undefined
+  queueType: undefined,
+  isExpanded: false
 }
 
 export const audioPlayerSlice = createSlice({
@@ -61,6 +63,9 @@ export const audioPlayerSlice = createSlice({
     },
     addTracksToPlayerQueue: (state, action: PayloadAction<ITrack[]>) => {
       state.playerQueue = [...state.playerQueue, ...action.payload]
+    },
+    changeExpanded: (state, action: PayloadAction<boolean>) => {
+      state.isExpanded = action.payload
     }
   },
 })
@@ -72,7 +77,8 @@ export const {
   changeCurrentTime,
   changeCurrentVolume,
   setTracksQueue,
-  addTracksToPlayerQueue
+  addTracksToPlayerQueue,
+  changeExpanded
 } = audioPlayerSlice.actions
 
 export default audioPlayerSlice.reducer
