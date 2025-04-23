@@ -1,16 +1,17 @@
 'use client'
 
 import {changeCurrentTime} from "@/lib/slices/audioPlayerSlice";
-import {Box, Slider, Typography} from "@mui/material";
+import {Box, Slider, SxProps, Typography} from "@mui/material";
 import {useAppDispatch, useAppSelector} from "@/lib/hooks/storeHooks";
 import {RefObject} from "react";
 import {getDurationString} from "@/lib/functions/getDurationString";
 
 interface IPlaybackProgressBarProps {
   audioRef: RefObject<HTMLAudioElement | null>;
+  sx?: SxProps;
 }
 
-export default function PlaybackProgressBar({audioRef}: IPlaybackProgressBarProps) {
+export default function PlaybackProgressBar({audioRef, sx}: IPlaybackProgressBarProps) {
   const dispatch = useAppDispatch();
   const {trackDuration} = useAppSelector(state => state.audioPlayerReducer.playerTrack);
   const {currentTime} = useAppSelector(state => state.audioPlayerReducer)
@@ -27,7 +28,8 @@ export default function PlaybackProgressBar({audioRef}: IPlaybackProgressBarProp
       flexGrow: 1,
       display: 'flex',
       alignItems: 'center',
-      gap: 1
+      gap: 1,
+      ...sx
     }}>
       <Typography
         variant='caption'

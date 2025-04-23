@@ -1,6 +1,6 @@
 'use client'
 
-import {Slider, Stack} from "@mui/material";
+import {Slider, Stack, SxProps} from "@mui/material";
 import VolumeUpRounded from '@mui/icons-material/VolumeUpRounded';
 import VolumeDownRounded from '@mui/icons-material/VolumeDownRounded';
 import {RefObject} from "react";
@@ -9,9 +9,10 @@ import {useAppDispatch, useAppSelector} from "@/lib/hooks/storeHooks";
 
 interface IVolumeSliderProps {
   audioRef: RefObject<HTMLAudioElement | null>;
+  sx?: SxProps;
 }
 
-export default function VolumeSlider({audioRef}: IVolumeSliderProps) {
+export default function VolumeSlider({audioRef, sx}: IVolumeSliderProps) {
   const dispatch = useAppDispatch();
   const {currentVolume} = useAppSelector(state => state.audioPlayerReducer)
   
@@ -29,6 +30,7 @@ export default function VolumeSlider({audioRef}: IVolumeSliderProps) {
       spacing={0.5}
       sx={{
         flexBasis: 120,
+        ...sx
     }}>
       <VolumeDownRounded sx={{
         opacity: .7

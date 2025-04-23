@@ -15,7 +15,6 @@ export default function TrackImage({ imageUrl, trackName, size = 40, showPlaying
     <Box
       data-id="track-list-item-image"
       sx={{
-        ...sx,
         width: size,
         height: size,
         overflow: 'hidden',
@@ -41,7 +40,8 @@ export default function TrackImage({ imageUrl, trackName, size = 40, showPlaying
           left: 33,
           right: 33,
           top: -2,
-        }
+        },
+        ...sx,
       }}
     >
       <Image
