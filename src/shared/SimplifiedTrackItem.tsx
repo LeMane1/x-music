@@ -1,11 +1,11 @@
 'use client'
 
-import {Box, IconButton, Stack, Typography} from "@mui/material";
+import {Box, Stack, Typography} from "@mui/material";
 import {ITrack} from "@/api/types";
 import TrackImage from "@/shared/TrackImage";
 import DurationLabel from "@/app/search/tracks-list/ui/DurationLabel";
 import {useAppSelector} from "@/lib/hooks/storeHooks";
-import ArrowDownwardIcon from "@mui/icons-material/ArrowDownward";
+import DownloadButton from "@/shared/DownloadButton";
 
 interface ISimplifiedTrackItemProps {
   track: ITrack;
@@ -81,13 +81,10 @@ export default function SimplifiedTrackItem({track, onClick, children, showDownl
           
           {
             showDownloadButton &&
-            <IconButton
-              href={track.audiodownload && track.audiodownload.length > 0 ? track.audiodownload :  '#'}
-              onClick={(e: React.MouseEvent<HTMLButtonElement | HTMLAnchorElement>) => e.stopPropagation()}
-              disabled={!(track.audiodownload_allowed || track.audiodownload)}
-            >
-              <ArrowDownwardIcon/>
-            </IconButton>
+            <DownloadButton
+              trackUrl={track.audiodownload}
+              isTrackDownloadAllowed={track.audiodownload_allowed}
+            />
           }
         </Stack>
       </Stack>
