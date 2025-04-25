@@ -80,9 +80,11 @@ export default function SimplifiedTrackItem({track, onClick, children, showDownl
           <DurationLabel duration={track.duration}/>
           
           {
-            showDownloadButton && <IconButton
+            showDownloadButton &&
+            <IconButton
+              component={track.audiodownload ? 'a' : 'button'}
               href={track.audiodownload ?? null}
-              onClick={(e) => e.stopPropagation()}
+              onClick={(e: React.MouseEvent<HTMLButtonElement | HTMLAnchorElement>) => e.stopPropagation()}
               disabled={!(track.audiodownload_allowed || track.audiodownload)}
             >
               <ArrowDownwardIcon/>
