@@ -82,8 +82,7 @@ export default function SimplifiedTrackItem({track, onClick, children, showDownl
           {
             showDownloadButton &&
             <IconButton
-              component={track.audiodownload ? 'a' : 'button'}
-              href={track.audiodownload ?? null}
+              href={track.audiodownload && track.audiodownload.length > 0 ? track.audiodownload :  '#'}
               onClick={(e: React.MouseEvent<HTMLButtonElement | HTMLAnchorElement>) => e.stopPropagation()}
               disabled={!(track.audiodownload_allowed || track.audiodownload)}
             >
