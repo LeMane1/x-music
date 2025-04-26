@@ -21,6 +21,7 @@ export default function TrackImage({ imageUrl, trackName, size = 40, showPlaying
         position: 'relative',
         transition: "transform 0.2s ease-in-out",
         borderRadius: '20%',
+        aspectRatio: '1/1',
         '&::before':{
           content: "''",
           position: 'absolute',
