@@ -44,7 +44,9 @@ export default function ControlsButtons({audioRef, showFullControlsSet = true, s
         trackArtistName: prevTrack.artist_name,
         trackImageUrl: prevTrack.image,
         trackDuration: prevTrack.duration,
-        audioUrl: prevTrack.audio
+        audioUrl: prevTrack.audio,
+        trackDownloadUrl: prevTrack.audiodownload,
+        isDownloadAllowed: prevTrack.audiodownload_allowed
       }))
     }else{
       dispatch(changePlaying(false))
@@ -63,7 +65,9 @@ export default function ControlsButtons({audioRef, showFullControlsSet = true, s
         trackArtistName: nextTrack.artist_name,
         trackImageUrl: nextTrack.image,
         trackDuration: nextTrack.duration,
-        audioUrl: nextTrack.audio
+        audioUrl: nextTrack.audio,
+        trackDownloadUrl: nextTrack.audiodownload,
+        isDownloadAllowed: nextTrack.audiodownload_allowed
       }))
     }else{
       dispatch(changePlaying(false))

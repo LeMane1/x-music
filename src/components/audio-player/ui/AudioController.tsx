@@ -27,7 +27,9 @@ export default function AudioController({audioRef}: IAudioControllerProps) {
           trackArtistName: nextTrack.artist_name,
           trackImageUrl: nextTrack.image,
           trackDuration: nextTrack.duration,
-          audioUrl: nextTrack.audio
+          audioUrl: nextTrack.audio,
+          trackDownloadUrl: nextTrack.audiodownload,
+          isDownloadAllowed: nextTrack.audiodownload_allowed,
         }))
       }else{
         dispatch(changePlaying(false))
