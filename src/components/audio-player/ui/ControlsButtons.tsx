@@ -1,6 +1,6 @@
 'use client'
 
-import {IconButton, Stack} from "@mui/material";
+import {IconButton, Stack, SxProps} from "@mui/material";
 import FastRewindIcon from "@mui/icons-material/FastRewind";
 import PauseIcon from "@mui/icons-material/Pause";
 import PlayArrowIcon from "@mui/icons-material/PlayArrow";
@@ -12,17 +12,22 @@ import {RefObject} from "react";
 interface IControlsButtonsProps {
   audioRef: RefObject<HTMLAudioElement | null>;
   showFullControlsSet?: boolean;
+  sx?: SxProps;
 }
 
-export default function ControlsButtons({audioRef, showFullControlsSet = true}: IControlsButtonsProps) {
+export default function ControlsButtons({audioRef, showFullControlsSet = true, sx}: IControlsButtonsProps) {
   const dispatch = useAppDispatch();
   const {isPlaying, currentTime} = useAppSelector(state => state.audioPlayerReducer)
   const tracks = useAppSelector(state => state.mainReducer.tracks)
   const trackId = useAppSelector(state => state.audioPlayerReducer.playerTrack.trackId)
   
-  const togglePlayback = () => dispatch(changePlaying(!isPlaying))
+  const togglePlayback = (e: React.MouseEvent<HTMLButtonElement | HTMLAnchorElement>) => {
+    e.stopPropagation()
+    dispatch(changePlaying(!isPlaying))
+  }
   
-  const handleBackwardTrack = () => {
+  const handleBackwardTrack = (e: React.MouseEvent<HTMLButtonElement | HTMLAnchorElement>) => {
+    e.stopPropagation()
     if (currentTime && audioRef.current){
       audioRef.current.currentTime = 0;
       dispatch(changeCurrentTime(0))
@@ -46,7 +51,8 @@ export default function ControlsButtons({audioRef, showFullControlsSet = true}: 
     }
   }
   
-  const handleForwardTrack = () => {
+  const handleForwardTrack = (e: React.MouseEvent<HTMLButtonElement | HTMLAnchorElement>) => {
+    e.stopPropagation()
     const currentIndex = tracks.findIndex((track) => track.id === trackId)
     
     if (currentIndex < tracks.length - 1) {
@@ -65,10 +71,18 @@ export default function ControlsButtons({audioRef, showFullControlsSet = true}: 
   }
   
   return (
-    <Stack direction='row'>
-      {showFullControlsSet && <IconButton onClick={handleBackwardTrack}>
-        <FastRewindIcon/>
-      </IconButton>}
+    <Stack
+      direction='row'
+      alignItems='center'
+      spacing={1}
+      sx={{
+        ...sx
+      }}
+    >
+      {showFullControlsSet &&
+        <IconButton onClick={handleBackwardTrack}>
+          <FastRewindIcon/>
+        </IconButton>}
       
       <IconButton onClick={togglePlayback}>
         {isPlaying ? <PauseIcon/> : <PlayArrowIcon/>}
