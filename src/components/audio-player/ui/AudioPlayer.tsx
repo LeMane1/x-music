@@ -1,8 +1,8 @@
 'use client'
 
-import {Container, Stack, Typography, Box} from "@mui/material";
+import {Container, Stack, Typography, Box, SwipeableDrawer} from "@mui/material";
 import {useRef} from "react";
-import {useAppSelector} from "@/lib/hooks/storeHooks";
+import {useAppDispatch, useAppSelector} from "@/lib/hooks/storeHooks";
 import TrackImage from "@/shared/TrackImage";
 import AudioPlayerWrapper from "@/components/audio-player/ui/AudioPlayerWrapper";
 import PlaybackProgressBar from "@/components/audio-player/ui/PlaybackProgressBar";
@@ -11,19 +11,30 @@ import ControlsButtons from "@/components/audio-player/ui/ControlsButtons";
 import {useBreakpoint} from "@/lib/hooks/useBreakpoint";
 import AudioController from "@/components/audio-player/ui/AudioController";
 import ExpandButton from "./ExpandButton";
+import ExpandedAudioPlayer from "@/components/audio-player/ui/ExpandedAudioPlayer";
+import {changeExpanded} from "@/lib/slices/audioPlayerSlice";
 
 export default function AudioPlayer() {
+  const dispatch = useAppDispatch();
   const {audioUrl, trackImageUrl, trackName, trackArtistName} = useAppSelector(state => state.audioPlayerReducer.playerTrack);
   const audioRef = useRef<HTMLAudioElement | null>(null)
+  const isExpanded = useAppSelector(state => state.audioPlayerReducer.isExpanded)
   const isMdSize = useBreakpoint('md')
   const isSmSize = useBreakpoint('sm')
   
   if (!audioUrl) return null;
   
+  const handleOnPlayerClick = () => {
+    if (!isSmSize && !isExpanded){
+      dispatch(changeExpanded(true))
+    }
+  }
+  
   return (
-    <AudioPlayerWrapper>
-      {
-        audioUrl &&
+    <Box onClick={handleOnPlayerClick}>
+      <AudioPlayerWrapper>
+        {
+          audioUrl &&
           <Container disableGutters>
             <Box
               component='audio'
@@ -73,8 +84,11 @@ export default function AudioPlayer() {
               
               {isMdSize && <ExpandButton/>}
             </Stack>
+            
+            <ExpandedAudioPlayer audioRef={audioRef}/>
           </Container>
-      }
-    </AudioPlayerWrapper>
+        }
+      </AudioPlayerWrapper>
+    </Box>
   )
 }

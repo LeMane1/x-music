@@ -33,7 +33,13 @@ const theme = createTheme({
     fontFamily: roboto.style.fontFamily,
   },
   components: {
-  
+    MuiDrawer: {
+      styleOverrides: {
+        paper: {
+          backgroundImage: "none"
+        }
+      },
+    }
   },
 });
 
