@@ -7,16 +7,18 @@ export default function ContainerLayout(
     children
   }: Readonly<{children: React.ReactNode}>){
   return (
-    <Stack direction="column"
-       sx={{
-         minHeight: '100vh',
-         paddingTop: '60px',
-         paddingBottom: '60px',
-       }}
+    <Stack
+      direction="column"
+      sx={{
+        minHeight: '100vh',
+        paddingTop: '60px',
+        paddingBottom: '100px',
+      }}
     >
       <Suspense fallback={null}>
         <Header/>
       </Suspense>
+      
       <Container maxWidth="lg">
         {children}
       </Container>
