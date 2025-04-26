@@ -11,6 +11,8 @@ interface IAudioPlayerTrack{
   trackImageUrl: string;
   audioUrl: string;
   trackDuration: number;
+  trackDownloadUrl: string;
+  isDownloadAllowed: boolean;
 }
 
 export interface AudioPlayerState{
@@ -31,6 +33,8 @@ const initialState: AudioPlayerState = {
     trackImageUrl: '',
     audioUrl: '',
     trackDuration: 0,
+    trackDownloadUrl: '',
+    isDownloadAllowed: false
   },
   isPlaying: false,
   currentTime: 0,

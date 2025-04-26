@@ -29,6 +29,8 @@ export const handleTrackItemOnClick = ({
     trackArtistName: track.artist_name,
     trackImageUrl: track.image,
     trackDuration: track.duration,
-    audioUrl: track.audio
+    audioUrl: track.audio,
+    trackDownloadUrl: track.audiodownload,
+    isDownloadAllowed: track.audiodownload_allowed
   }))
 }
